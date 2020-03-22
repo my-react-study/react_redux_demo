@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-
+import { Router, Route } from 'react-router-dom'
+import history from './history';
 
 import Home from './components/Home';
 
@@ -9,15 +9,10 @@ import PeopleList from './components/people/PeopleList';
 import PersonDetails from './components/people/PersonDetails';
 
 const router = (
-  <Router >
-
+  <Router history={history}>
     <Route exact path='/' component={Home} />
-
-    <Route path='/people' >
-      <Route component={PeopleList} />
-      <Route path=':id' component={PersonDetails} />
-    </Route>
-
+    <Route exact path='/people' component={PeopleList} />
+    <Route path='/people/:id' component={PersonDetails} />
   </Router>
 );
 

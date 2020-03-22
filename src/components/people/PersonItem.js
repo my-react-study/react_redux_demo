@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import history from '../../history';
 
 import {
   setSelectedPerson,
@@ -22,7 +22,8 @@ class PersonItem extends Component {
 
   showDetails = () => {
     store.dispatch(setSelectedPerson(this.props.person));
-    this.props.history.push(`/people/${this.props.index}`)
+    history.push(`/people/${this.props.index}`)
+    // history.push(`/`)
   }
 
   remove = () => {

@@ -9,13 +9,13 @@ class PersonDetails extends Component {
       <div>
         <h1>Person Details</h1>
 
-        <p>Name: { person.name } </p>
-        <p>Birth year: { person.birth_year }</p>
-        <p>Gender: { person.gender }</p>
-        <p>Height: { person.height }</p>
-        <p>Mass: { person.mass }</p>
-        <p>Hair color: { person.hair_color }</p>
-        <p>Skin color: { person.skin_color }</p>
+        <p>Name: {person.name} </p>
+        <p>Birth year: {person.birth_year}</p>
+        <p>Gender: {person.gender}</p>
+        <p>Height: {person.height}</p>
+        <p>Mass: {person.mass}</p>
+        <p>Hair color: {person.hair_color}</p>
+        <p>Skin color: {person.skin_color}</p>
 
         <Link to='/people'>People</Link>
       </div>

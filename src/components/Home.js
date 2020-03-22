@@ -6,7 +6,7 @@ class Home extends Component {
     return (
       <div>
         <p>Star Wars info</p>
-        <Link to='people'>People</Link>
+        <Link to='/people'>People</Link>
       </div>
     );
   }
