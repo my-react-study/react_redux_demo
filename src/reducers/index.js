@@ -1,8 +1,7 @@
-import { combineReducers } from 'redux'
-import todos from './todos'
-import visibilityFilter from './visibilityFilter'
+import { combineReducers } from 'redux';
+
+import peopleReducer from './peopleReducer';
 
 export default combineReducers({
-  todos,
-  visibilityFilter
-})
+  peopleState: peopleReducer
+});
