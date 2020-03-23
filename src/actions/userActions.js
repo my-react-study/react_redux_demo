@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {
   SET_USERS,
-  SET_USERS_BY_USERNAME
+  SET_USERS_BY_USERNAME,
+  DELETE_USER_BY_ID
 } from './actionTypes';
 import servicePath from '../config/ApiUrl'
 
@@ -16,6 +17,13 @@ export const setUsersByUsername = users => {
   return {
     type: SET_USERS_BY_USERNAME,
     users
+  };
+}
+
+export const deleteUserById = id => {
+  return {
+    type: DELETE_USER_BY_ID,
+    id
   };
 }
 
@@ -80,5 +88,20 @@ export const editUserAction = (user) => {
     }).catch(error => {
       console.log(error);
     });
+  }
+}
+
+export const deleteUserAction = (id) => {
+  return (dispatch) => {
+      axios({
+          method: 'delete',
+          url: servicePath.deleteUser + id,
+      }).then((res) => {
+        if (res.data.isSuccess) {
+          dispatch(deleteUserById(id))
+      }
+      }).catch(error => {
+        console.log(error);
+      });
   }
 }

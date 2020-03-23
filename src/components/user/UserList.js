@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Table, Input, Row, Button, Modal, Form, message } from 'antd';
 import 'antd/dist/antd.css'
 import store from '../../store';
-import { getAllUserAction, getUsersByUsernameAction, addUserAction, editUserAction } from '../../actions/userActions';
+import { getAllUserAction, getUsersByUsernameAction, addUserAction, editUserAction, deleteUserAction } from '../../actions/userActions';
 import { connect } from 'react-redux';
 
 const { Search } = Input;
 const FormItem = Form.Item;
+const { confirm } = Modal;
 
 class UserList extends Component {
 
@@ -47,6 +48,20 @@ class UserList extends Component {
             }
         })
     }
+
+    remove = (row) => {
+        confirm({
+            title: '是否要删除该用户?',
+            okText: '是',
+            okType: '否',
+            cancelText: 'No',
+            onOk() {
+                const action = deleteUserAction(row.id)
+                store.dispatch(action)
+                message.success('删除成功!')
+            }
+        });
+    };
 
     columns = [
         {
