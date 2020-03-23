@@ -24,7 +24,7 @@ const deleteUserById = (state, action) => {
 };
 
 const addUser = (state, action) => {
-  return { ...state, users: state.users.concat(action.user) };
+  return { ...state, users: [...state.users, action.user] };
 };
 
 const editUser = (state, action) => {
