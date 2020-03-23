@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Table, Input, Row, Button, Modal, Form } from 'antd';
 import 'antd/dist/antd.css'
 import store from '../../store';
-import { getAllUserAction } from '../../actions/userActions';
+import { getAllUserAction,getUsersByUsername } from '../../actions/userActions';
 import { connect } from 'react-redux';
 
 const { Search } = Input;
@@ -21,6 +21,11 @@ class UserList extends Component {
     componentDidMount() {
         store.dispatch(getAllUserAction())
     }
+
+    search = (e) => {
+        const action = getUsersByUsername(e.target.value)
+        store.dispatch(action)
+    };
 
     columns = [
         {
