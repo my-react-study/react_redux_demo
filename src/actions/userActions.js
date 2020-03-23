@@ -3,7 +3,8 @@ import {
   SET_ALL_USERS,
   SET_USERS_BY_USERNAME,
   DELETE_USER_BY_ID,
-  ADD_USER
+  ADD_USER,
+  EDIT_USER
 } from './actionTypes';
 import servicePath from '../config/ApiUrl'
 
@@ -31,6 +32,13 @@ export const deleteUserById = id => {
 export const addUser = user => {
   return {
     type: ADD_USER,
+    user
+  };
+}
+
+export const editUser = user => {
+  return {
+    type: EDIT_USER,
     user
   };
 }
@@ -85,14 +93,13 @@ export const addUserAction = (user) => {
 
 export const editUserAction = (user) => {
   return (dispatch) => {
-    console.log(user)
     axios({
       method: 'put',
       url: servicePath.editUser,
       data: user
     }).then((res) => {
       if (res.data.isSuccess) {
-        dispatch(getAllUserAction())
+        dispatch(editUser(user))
       }
     }).catch(error => {
       console.log(error);
