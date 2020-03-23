@@ -7,6 +7,8 @@ class Home extends Component {
       <div>
         <p>Star Wars info</p>
         <Link to='/people'>People</Link>
+        <br />
+        <Link to='/user'>User</Link>
       </div>
     );
   }
