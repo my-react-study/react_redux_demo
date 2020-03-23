@@ -24,10 +24,6 @@ class UserList extends Component {
         store.dispatch(getAllUserAction())
     }
 
-    search = (e) => {
-        store.dispatch(getUsersByUsernameAction(e.target.value))
-    };
-
     //添加与修改用户提交
     handleOk = () => {
         this.props.form.validateFieldsAndScroll((err, value) => {
@@ -118,7 +114,7 @@ class UserList extends Component {
         return (
             <div className="App">
                 <Row>
-                    <Search style={{ width: 300 }} onChange={this.search} placeholder="请输入姓名" />
+                    <Search style={{ width: 300 }} onChange={this.props.search} placeholder="请输入姓名" />
                     <Button type="primary" style={{ marginLeft: 20 }} onClick={() => this.modal('add')}>添加用户</Button>
                 </Row>
                 <Row style={{ paddingTop: 20 }}>
@@ -164,4 +160,8 @@ const mapStateToProps = store => {
     };
 };
 
-export default connect(mapStateToProps)(Form.create({})(UserList))
+const mapDispatchToProps = dispatch => ({
+    search: e => dispatch(getUsersByUsernameAction(e.target.value))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create({})(UserList))
