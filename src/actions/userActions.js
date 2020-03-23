@@ -1,14 +1,14 @@
 import axios from 'axios';
 import {
-  SET_USERS,
+  SET_ALL_USERS,
   SET_USERS_BY_USERNAME,
   DELETE_USER_BY_ID
 } from './actionTypes';
 import servicePath from '../config/ApiUrl'
 
-export const setUsers = users => {
+export const setAllUsers = users => {
   return {
-    type: SET_USERS,
+    type: SET_ALL_USERS,
     users
   };
 };
@@ -34,7 +34,7 @@ export const getAllUserAction = () => {
       url: servicePath.getAllUser,
       header: { 'Access-Control-Allow-Origin': '*' }
     }).then(res => {
-      dispatch(setUsers(res.data.data.userList));
+      dispatch(setAllUsers(res.data.data.userList));
     })
       .catch(error => {
         console.log(error);

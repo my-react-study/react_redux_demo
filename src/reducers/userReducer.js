@@ -1,5 +1,5 @@
 import {
-  SET_USERS,
+  SET_ALL_USERS,
   SET_USERS_BY_USERNAME,
   DELETE_USER_BY_ID
 } from '../actions/actionTypes';
@@ -8,7 +8,7 @@ const initialState = {
   users: []
 };
 
-const setUsers = (state, action) => {
+const setAllUsers = (state, action) => {
   return { ...state, users: action.users };
 };
 
@@ -23,8 +23,8 @@ const deleteUserById = (state, action) => {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_USERS:
-      return setUsers(state, action);
+    case SET_ALL_USERS:
+      return setAllUsers(state, action);
     case SET_USERS_BY_USERNAME:
       return setUsersByUsername(state, action);
     case DELETE_USER_BY_ID:
