@@ -65,3 +65,20 @@ export const addUserAction = (user) => {
     });
   }
 }
+
+export const editUserAction = (user) => {
+  return (dispatch) => {
+    console.log(user)
+    axios({
+      method: 'put',
+      url: servicePath.editUser,
+      data: user
+    }).then((res) => {
+      if (res.data.isSuccess) {
+        dispatch(getAllUserAction())
+      }
+    }).catch(error => {
+      console.log(error);
+    });
+  }
+}

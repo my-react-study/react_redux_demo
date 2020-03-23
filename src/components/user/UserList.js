@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Table, Input, Row, Button, Modal, Form, message } from 'antd';
 import 'antd/dist/antd.css'
 import store from '../../store';
-import { getAllUserAction, getUsersByUsernameAction,addUserAction } from '../../actions/userActions';
+import { getAllUserAction, getUsersByUsernameAction, addUserAction, editUserAction } from '../../actions/userActions';
 import { connect } from 'react-redux';
 
 const { Search } = Input;
@@ -14,7 +14,8 @@ class UserList extends Component {
         super(props)
         this.state = {
             visible: false,
-            modalType: ''
+            modalType: '',
+            editRow: null
         };
     }
 
@@ -38,6 +39,10 @@ class UserList extends Component {
                 this.setState({ visible: false });
                 message.success("添加成功!")
             } else {
+                user.id = this.state.editRow.id
+                const action = editUserAction(user)
+                store.dispatch(action)
+                this.setState({ visible: false });
                 message.success("编辑成功!")
             }
         })
