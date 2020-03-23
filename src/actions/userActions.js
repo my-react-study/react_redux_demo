@@ -34,7 +34,7 @@ export const getAllUserAction = () => {
   };
 };
 
-export const getUsersByUsername = (username) => {
+export const getUsersByUsernameAction = (username) => {
   return (dispatch) => {
     if (username === null || username === "") {
       dispatch(getAllUserAction())
@@ -47,5 +47,21 @@ export const getUsersByUsername = (username) => {
           console.log(error);
         });
     }
+  }
+}
+
+export const addUserAction = (user) => {
+  return (dispatch) => {
+    axios({
+      method: 'post',
+      url: servicePath.addUser,
+      data: user
+    }).then((res) => {
+      if (res.data.isSuccess) {
+        dispatch(getAllUserAction())
+      }
+    }).catch(error => {
+      console.log(error);
+    });
   }
 }

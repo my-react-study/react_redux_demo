@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Table, Input, Row, Button, Modal, Form } from 'antd';
+import { Table, Input, Row, Button, Modal, Form, message } from 'antd';
 import 'antd/dist/antd.css'
 import store from '../../store';
-import { getAllUserAction,getUsersByUsername } from '../../actions/userActions';
+import { getAllUserAction, getUsersByUsernameAction,addUserAction } from '../../actions/userActions';
 import { connect } from 'react-redux';
 
 const { Search } = Input;
@@ -23,9 +23,25 @@ class UserList extends Component {
     }
 
     search = (e) => {
-        const action = getUsersByUsername(e.target.value)
-        store.dispatch(action)
+        store.dispatch(getUsersByUsernameAction(e.target.value))
     };
+
+    //添加与修改用户提交
+    handleOk = () => {
+        this.props.form.validateFieldsAndScroll((err, value) => {
+            if (err) return;
+            let user = {
+                userName: value.username, age: value.age, address: value.address
+            };
+            if (this.state.modalType === 'add') {
+                store.dispatch(addUserAction(user))
+                this.setState({ visible: false });
+                message.success("添加成功!")
+            } else {
+                message.success("编辑成功!")
+            }
+        })
+    }
 
     columns = [
         {
@@ -90,6 +106,7 @@ class UserList extends Component {
                 </Row>
                 <Modal
                     title={this.state.modalType === 'add' ? "添加用户" : "编辑用户"}
+                    onOk={this.handleOk}
                     onCancel={() => this.setState({ visible: false })}
                     visible={this.state.visible}>
                     <Form>
