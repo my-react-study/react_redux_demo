@@ -2,7 +2,8 @@ import axios from 'axios';
 import {
   SET_ALL_USERS,
   SET_USERS_BY_USERNAME,
-  DELETE_USER_BY_ID
+  DELETE_USER_BY_ID,
+  ADD_USER
 } from './actionTypes';
 import servicePath from '../config/ApiUrl'
 
@@ -24,6 +25,13 @@ export const deleteUserById = id => {
   return {
     type: DELETE_USER_BY_ID,
     id
+  };
+}
+
+export const addUser = user => {
+  return {
+    type: ADD_USER,
+    user
   };
 }
 
@@ -66,7 +74,8 @@ export const addUserAction = (user) => {
       data: user
     }).then((res) => {
       if (res.data.isSuccess) {
-        dispatch(getAllUserAction())
+        user.id=res.data.insertId
+        dispatch(addUser(user))
       }
     }).catch(error => {
       console.log(error);

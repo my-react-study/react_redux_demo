@@ -1,7 +1,8 @@
 import {
   SET_ALL_USERS,
   SET_USERS_BY_USERNAME,
-  DELETE_USER_BY_ID
+  DELETE_USER_BY_ID,
+  ADD_USER
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -21,6 +22,10 @@ const deleteUserById = (state, action) => {
   return { ...state, users: users };
 };
 
+const addUser = (state, action) => {
+  return { ...state, users: state.users.concat(action.user) };
+};
+
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_ALL_USERS:
@@ -29,6 +34,8 @@ const userReducer = (state = initialState, action) => {
       return setUsersByUsername(state, action);
     case DELETE_USER_BY_ID:
       return deleteUserById(state, action);
+    case ADD_USER:
+      return addUser(state, action);
     default:
       return state;
   }

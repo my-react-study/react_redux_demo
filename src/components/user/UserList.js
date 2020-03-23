@@ -29,7 +29,7 @@ class UserList extends Component {
         this.props.form.validateFieldsAndScroll((err, value) => {
             if (err) return;
             let user = {
-                userName: value.username, age: value.age, address: value.address
+                username: value.username, age: value.age, address: value.address
             };
             if (this.state.modalType === 'add') {
                 store.dispatch(addUserAction(user))
