@@ -3,7 +3,7 @@ import {
   SET_USERS,
   SET_USERS_BY_USERNAME
 } from './actionTypes';
-
+import servicePath from '../config/ApiUrl'
 
 export const setUsers = users => {
   return {
@@ -23,7 +23,7 @@ export const getAllUserAction = () => {
   return dispatch => {
     axios({
       method: 'get',
-      url: 'http://127.0.0.1:7001/admin/getAllUser',
+      url: servicePath.getAllUser,
       header: { 'Access-Control-Allow-Origin': '*' }
     }).then(res => {
       dispatch(setUsers(res.data.data.userList));
@@ -40,7 +40,7 @@ export const getUsersByUsername = (username) => {
       dispatch(getAllUserAction())
     }
     else {
-      axios.get('http://127.0.0.1:7001/admin/getUsersByUsername/' + username)
+      axios.get(servicePath.getUsersByUsername + username)
         .then((res) => {
           dispatch(setUsersByUsername(res.data.data.userList))
         }).catch(error => {
