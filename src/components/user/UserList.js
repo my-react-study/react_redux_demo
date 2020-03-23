@@ -37,8 +37,7 @@ class UserList extends Component {
                 message.success("添加成功!")
             } else {
                 user.id = this.state.editRow.id
-                const action = editUserAction(user)
-                store.dispatch(action)
+                store.dispatch(editUserAction(user))
                 this.setState({ visible: false });
                 message.success("编辑成功!")
             }
@@ -155,7 +154,7 @@ const mapDispatchToProps = dispatch => ({
             okType: '否',
             cancelText: 'No',
             onOk() {
-                store.dispatch(deleteUserAction(row.id))
+                dispatch(deleteUserAction(row.id))
                 message.success('删除成功!')
             }
         });
