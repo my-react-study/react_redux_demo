@@ -45,20 +45,6 @@ class UserList extends Component {
         })
     }
 
-    remove = (row) => {
-        confirm({
-            title: '是否要删除该用户?',
-            okText: '是',
-            okType: '否',
-            cancelText: 'No',
-            onOk() {
-                const action = deleteUserAction(row.id)
-                store.dispatch(action)
-                message.success('删除成功!')
-            }
-        });
-    };
-
     columns = [
         {
             dataIndex: "id", title: "ID",
@@ -76,7 +62,7 @@ class UserList extends Component {
             dataIndex: "action", title: "操作", width: 200, render: (text, row) => {
                 return <div>
                     <Button onClick={() => this.modal('edit', row)}>编辑</Button>
-                    <Button style={{ marginLeft: 10 }} type="danger" onClick={() => this.remove(row)}>删除</Button>
+                    <Button style={{ marginLeft: 10 }} type="danger" onClick={() => this.props.remove(row)}>删除</Button>
                 </div>
             }
         }];
@@ -161,7 +147,19 @@ const mapStateToProps = store => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    search: e => dispatch(getUsersByUsernameAction(e.target.value))
+    search: e => dispatch(getUsersByUsernameAction(e.target.value)),
+    remove: (row) => {
+        confirm({
+            title: '是否要删除该用户?',
+            okText: '是',
+            okType: '否',
+            cancelText: 'No',
+            onOk() {
+                store.dispatch(deleteUserAction(row.id))
+                message.success('删除成功!')
+            }
+        });
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form.create({})(UserList))
